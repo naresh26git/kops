@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    stages {
+        stage('Pull Code From GitHub') {
+            steps {
+                git 'https://githu.com'
+            }
+        }
+        stage('build the Docker image') {
+            stage {
+                sh 'docker build -t myimage /var/lib/jenkins/workspace/k8'
+                sh 'docker tag myimage naresh2603/myimage:latest'
+                sh 'docker tag myimage naresh2603/myimage:${BUILD_NUMBER}'
+            }
+        }
+        stage('Push the Docker image') {
+            steps {
+                sh 'docker image push --all-tags naresh2603/myimage'
+            }
+        }
+        stage('Deploy on kubernetes') {
+            steps {
+                sh 'kubectl apply -f /var/lib/jenkins/workspace/k8/pod.yaml'
+                sh 'kubectl rollout restart deployment loadbalancer-pod'
+            }
+        }
+    }
+}

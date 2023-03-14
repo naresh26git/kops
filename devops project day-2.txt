@@ -1,0 +1,23 @@
+SONARQUBE: CODE QUALITY TOOL 
+
+1. DATABASE REQUIRED
+
+2. 3 GB RAM MACHINE REQUIRED
+
+3. JAVA REQUIRED
+
+4. SONARQUBE --- TWO USERS REQUIRED TO ACCESS DATABASE & USER NEEDS PERMISSION TO ACCESS DB
+
+5. WE NEED CONFIGURE TWO CONFIGURATION FILES
+
+6. SONARQUBE SHD NOT BE STARTED WITH ROOT USER
+
+
+https://aws20922.s3.ap-south-1.amazonaws.com/sonarqube.docx
+
+chown -R ec2-user:ec2-user /opt/sonarqube-6.7.6 ---> change owner
+
+
+https://qiita.com/leechungkyu/items/86cad0396cf95b3b6973 ---. nexus 
+
+

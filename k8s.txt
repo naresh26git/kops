@@ -1,0 +1,105 @@
+KOPS BINARY SETUP 
+
+# curl -LO https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+# mv kops-linux-amd64 kops
+# chmod +x ./kops
+# sudo mv ./kops /usr/local/bin/kops
+
+KUBECTL BINARY SETUP
+
+# curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+#  chmod +x ./kubectl
+# sudo mv ./kops /usr/local/bin/kubectl
+
+configure the aws client to use your new IAM user
+# aws configure       # use your access and secret key here
+# aws iam list-user   # you should see a list of all your IAM users
+ 
+Notes:
+
+because "aws configure" doesn't export these vars for kops to use, we export them now
+
+# export AWS_ACCESS_KEY_ID=$( aws configure get aws_acess_key_id)
+# export AWS_SECRET_ACCESS_KEY=$( aws configure get aws_secret_access_key)
+
+cluster type :
+1. single node cluster
+2. multinode cluster
+
+ CLUSTER STATE STORAGE
+
+In order to store the state of your cluster,the representation of your cluster, we need to create a dedicated S3 bucket for KOPS to use.
+this bucket will become the source of truth for our cluster configuration. In this guide we'll call this bucket awsnaresh, but you should
+add a custom prefix as bucket names need to be unique.
+
+# aws s3api create-bucket --bucket awsnaresh --region us-east-1
+# aws s3api put-bucket-versioning --bucket awsdamo --versioning-configuration status=Enabled
+
+NODES AUTHENTICATION METHODS
+
+ Create sshkey for machines
+
+# ssh-keygen
+
+CREATING YOUR FIRST CLUSTER
+
+Prepare local environment ( multimaster types)
+
+We ready to start creating our first cluster! let's first set up a few environment variables to make this 
+process easier.
+
+# export NAME=aws.naresh.com
+# export KOPS_STATE_store=s3://awsnaresh
+
+for a gossip-based cluster,make sure the name ends with k8s.local.for example
+
+# export NAME=naresh.k8s.local
+# export KOPS_STATE_STORE=s3://kops2822
+
+NOTE:
+
+you don't have to use environment variable here.you can always define the values using the -name and -state flags later.
+
+# kops create cluster --zones us-east-1a ${NAME}
+# kops create secret ${NAME} sshpublic admin -i ~/.ssh/id_rsa.pub
+
+Suggestions:
+ * list clusters with: kops get cluster
+ * edit this cluster with: kops edit cluster naresh.k8s.local
+ * edit your node instance group: kops edit ig --name=naresh.k8s.local nodes-us-east-1a
+ * edit your master instance group: kops edit ig --name=naresh.k8s.local master-us-east-1a
+
+Finally configure your cluster with: kops update cluster --name naresh.k8s.local --yes --admin
+
+
+Suggestions:
+ * validate cluster: kops validate cluster --wait 10m
+ * list nodes: kubectl get nodes --show-labels
+ * ssh to the master: ssh -i ~/.ssh/id_rsa ubuntu@api.naresh.k8s.local
+ * the ubuntu user is specific to Ubuntu. If not using Ubuntu please use the appropriate user based on your OS.
+ * read about installing addons at: https://kops.sigs.k8s.io/addons.
+
+
+DELETE A CLUSTER
+
+# kops delete cluster --name=naresh.k8s.local --state=s3://kops2822 --yes
+
+IF CHOOSE MULTIPLE AVAILABILITY ZONES
+
+#kops create cluster --zones us-east-1a,east-1b ${NAME}
+
+
+
+jenkins 
+cd /etc/default
+user="root"
+change the ownership pf jenkins home ,webroot and login:
+
+chown -R root:root /var/lib/jenkins
+chown -R root:root /var/cache/jenkins
+chown -R root:root /var/log/jenkins
+
+
+
+
+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

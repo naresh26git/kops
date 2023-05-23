@@ -9,7 +9,7 @@ KUBECTL BINARY SETUP
 
 # curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 #  chmod +x ./kubectl
-# sudo mv ./kops /usr/local/bin/kubectl
+# sudo mv ./kubectl /usr/local/bin/kubectl
 
 configure the aws client to use your new IAM user
 # aws configure       # use your access and secret key here
@@ -54,13 +54,13 @@ process easier.
 for a gossip-based cluster,make sure the name ends with k8s.local.for example
 
 # export NAME=naresh.k8s.local
-# export KOPS_STATE_STORE=s3://kops2822
+# export KOPS_STATE_STORE=s3://kops2623
 
 NOTE:
 
 you don't have to use environment variable here.you can always define the values using the -name and -state flags later.
 
-# kops create cluster --zones us-east-1a ${NAME}
+# kops create cluster --zones ap-south-1 ${NAME}
 # kops create secret ${NAME} sshpublic admin -i ~/.ssh/id_rsa.pub
 
 Suggestions:

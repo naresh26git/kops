@@ -25,6 +25,7 @@ spec:
       labels:
         app: hello
     spec:
+      serviceAccountName: my-service-account
       containers:
       - name: hello
         image: iammitran/myimage:latest

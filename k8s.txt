@@ -22,6 +22,11 @@ because "aws configure" doesn't export these vars for kops to use, we export the
 # export AWS_ACCESS_KEY_ID=$( aws configure get aws_acess_key_id)
 # export AWS_SECRET_ACCESS_KEY=$( aws configure get aws_secret_access_key)
 
+
+export AWS_ACCESS_KEY_ID=AKIAXLTYQRL4IKD5AZ5M
+export AWS_SECRET_ACCESS_KEY=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
+
+
 cluster type :
 1. single node cluster
 2. multinode cluster
@@ -60,7 +65,7 @@ NOTE:
 
 you don't have to use environment variable here.you can always define the values using the -name and -state flags later.
 
-# kops create cluster --zones ap-south-1 ${NAME}
+# kops create cluster --zones ap-south-1a ${NAME}
 # kops create secret ${NAME} sshpublic admin -i ~/.ssh/id_rsa.pub
 
 Suggestions:
@@ -82,7 +87,7 @@ Suggestions:
 
 DELETE A CLUSTER
 
-# kops delete cluster --name=naresh.k8s.local --state=s3://kops2822 --yes
+# kops delete cluster --name=naresh.k8s.local --state=s3://kops2623 --yes
 
 IF CHOOSE MULTIPLE AVAILABILITY ZONES
 
@@ -104,6 +109,3 @@ chown -R jenkins:jenkins /var/cache/jenkins
 chown -R jenkins:jenkins /var/log/jenkins
 
 
-
-
-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

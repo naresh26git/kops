@@ -13,7 +13,7 @@ KUBECTL BINARY SETUP
 
 configure the aws client to use your new IAM user
 # aws configure       # use your access and secret key here
-# aws iam list-user   # you should see a list of all your IAM users
+# aws iam list-users   # you should see a list of all your IAM users
  
 Notes:
 

@@ -54,7 +54,7 @@ We ready to start creating our first cluster! let's first set up a few environme
 process easier.
 
 # export NAME=aws.naresh.com
-# export KOPS_STATE_store=s3://awsnaresh
+# export KOPS_STATE_STORE=s3://awsnaresh
 
 for a gossip-based cluster,make sure the name ends with k8s.local.for example
 

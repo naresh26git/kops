@@ -59,7 +59,7 @@ process easier.
 for a gossip-based cluster,make sure the name ends with k8s.local.for example
 
 # export NAME=naresh.k8s.local
-# export KOPS_STATE_STORE=s3://kops2020
+# export KOPS_STATE_STORE=s3://kops-1202
 
 NOTE:
 

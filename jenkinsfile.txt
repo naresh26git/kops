@@ -16,7 +16,6 @@ pipeline {
         stage('Push the Docker image') {
             steps {
                 sh 'docker image push --all-tags naresh2603/myimage'
-                sh 'docker image'
             }
         }
         stage('Deploy on kubernetes') {

@@ -11,6 +11,7 @@ pipeline {
                 sh 'docker build -t myimage /var/lib/jenkins/workspace/k8'
                 sh 'docker tag myimage naresh2603/myimage:latest'
                 sh 'docker tag myimage naresh2603/myimage:${BUILD_NUMBER}'
+                sh 'docker images'
             }
         }
         stage('Push the Docker image') {

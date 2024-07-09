@@ -65,7 +65,7 @@ NOTE:
 
 you don't have to use environment variable here.you can always define the values using the -name and -state flags later.
 
-# kops create cluster --zones ap-south-1a ${NAME}
+# kops create cluster --zones us-east-1a ${NAME}
 # kops create secret ${NAME} sshpublic admin -i ~/.ssh/id_rsa.pub
 
 Suggestions:

@@ -12,6 +12,7 @@ pipeline {
                 sh 'docker tag myimage naresh2603/myimage:latest'
                 sh 'docker tag myimage naresh2603/myimage:${BUILD_NUMBER}'
                 sh 'docker images'
+                sh 'docker ps'
             }
         }
         stage('Push the Docker image') {
